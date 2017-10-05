@@ -1,5 +1,9 @@
 # DatingSiteAngularMaterial
 
+Aplikacja testowa stworzona na podstawie tutoriala: 
+https://www.barbarianmeetscoding.com/blog/2017/02/08/building-beautiful-web-apps-with-angular-material-part-ii/
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.4.
 
 ## Development server
