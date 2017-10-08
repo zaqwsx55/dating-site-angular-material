@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+.app {
+    height: 100vh;
+}
+
+md-toolbar {
+    z-index: 10;
+}
+
+md-sidenav {
+    width: 40vw;
+}
+
+md-card {
+    margin: 12px;
+}
+
+$md-toolbar-height: 64px;
+$md-tab-header-height: 48px;
+.mat-tab-body-content {
+    height: calc(100vh - #{$md-toolbar-height} - #{$md-tab-header-height}) !important;
+}
+
+.tab-actions {
+    display: inline-block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+mat-toolbar-row {
+    justify-content: space-between;
+}

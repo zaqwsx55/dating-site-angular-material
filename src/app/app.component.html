@@ -1,20 +1,79 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<section class="app flex-container" fxLayout="column" fxLayoutAlign="start stretch"
+  [class.dark-theme]="isDarkTheme">
+    
+  <md-toolbar color="primary" class="mat-elevation-z10">
+    <span>
+      <md-icon>favorite</md-icon>
+      Derek Zoolander's Center for Models Who Can't Find Love
+    </span>
+    <button md-icon-button [md-menu-trigger-for]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </md-toolbar>
 
+  <md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item>Settings</button>
+    <button md-menu-item (click)="toggleTheme()">Toggle Theme</button>
+    <button md-menu-item>Contact</button>
+    <button md-menu-item>Free Hugs</button>
+    <button md-menu-item>Help Me!</button>
+  </md-menu>
+  
+  <md-sidenav-container fxFlex>
+    
+    <md-sidenav mode="side" position="end" class="mat-elevation-z6" #sidenav>
+      <md-tab-group>
+        <md-tab label="About">
+          <section class="flex-container" fxLayout="column" fxLayoutAlign="start stretch">
+            <md-card>
+              <md-card-title>Name</md-card-title>
+              <md-card-content>{{ selectedModel?.name }}</md-card-content>
+            </md-card>
+            <md-card>
+              <md-card-title>Status</md-card-title>
+              <md-card-content>{{ selectedModel?.status }}</md-card-content>
+            </md-card>
+            <md-card>
+              <md-card-title>Bio</md-card-title>
+              <md-card-content>{{ selectedModel?.about }}</md-card-content>
+            </md-card>
+          </section>
+          <section class="tab-actions">
+            <button md-fab color="warn" (click)="sidenav.close()">
+              <md-icon>close</md-icon>
+            </button>
+          </section>
+        </md-tab>
+        <md-tab label="Messages">
+          <section class="flex-container" fxLayout="column" fxLayoutAlign="start stretch">
+            <md-card *ngFor="let message of selectedModel?.messages">
+              <md-card-subtitle>{{ message.who }}</md-card-subtitle>
+              <md-card-content>{{ message.content }}</md-card-content>
+            </md-card>
+          </section>
+          <footer class="tab-actions">
+            <button md-fab color="accent" (click)="addMessage()">
+              <md-icon>add</md-icon>
+            </button>
+          </footer>
+        </md-tab>
+        <md-tab label="Photos"></md-tab>
+      </md-tab-group>
+    </md-sidenav>
+
+    <md-grid-list cols="4" rowHeight="250px">
+      <md-grid-tile *ngFor="let model of models" [rowspan]="model.rows" [colspan]="model.cols">
+        <img src="assets/{{model.name}}.png" alt="model {{model.name}}">
+        <md-grid-tile-footer>
+          <h3 md-line>{{ model.name }}</h3>
+          <span md-line>{{ model.status }}</span>
+          <button md-icon-button (click)="showDetails(model); sidenav.open()">
+            <md-icon>info</md-icon>
+          </button>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+  
+  </md-sidenav-container>
+
+</section>
